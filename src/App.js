@@ -46,8 +46,11 @@ export default class App extends Component {
   }
 
   handlePanSearch = debounce(async () => {
+    this.setState({
+      isLoading: true,
+    })
     const results = await searchBusinesses(this.state.searchStr, this.state.mapCenter)
-    this.setState({ results })
+    this.setState({ results, isLoading: false })
   }, 300)
 
   render() {
