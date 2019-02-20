@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Leaflet from 'leaflet'
 import { Map, TileLayer, Marker } from 'react-leaflet'
 import Popup from './Popup'
-import mapIconSvg from '../mapIcon.svg'
+import mapIconSvg from '../svg/map.svg'
 import './Map.css'
 
 const ACCESS_TOKEN = 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw'
@@ -22,6 +22,7 @@ export default class MapComponent extends Component {
       searchResults,
       onViewportChanged,
       initialViewport,
+      handleAddFav,
     } = this.props
 
     return (
@@ -29,6 +30,7 @@ export default class MapComponent extends Component {
         viewport={initialViewport}
         ref={this.mapRef}
         style={{ height: '100vh' }}
+        animate={true}
         onViewportChanged={onViewportChanged}
       >
         <TileLayer
@@ -48,7 +50,7 @@ export default class MapComponent extends Component {
             icon={MapIcon}
             riseOnHover
           >
-            <Popup business={business} />
+            <Popup handleAddFav={handleAddFav} business={business} />
           </Marker>
         )}
       </Map>

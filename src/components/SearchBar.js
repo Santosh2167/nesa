@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import './SearchBar.css';
 
 export default class Search extends Component {
   state = { text: '' }

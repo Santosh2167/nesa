@@ -5,8 +5,18 @@
   z-index: 1000;
 }
 
-.sidebar-title {
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 25px;
+.icon-title {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+.sidebar-title{
+  position: relative;
+    top: 20px;
+    left: 10px;
+    font-family: fantasy;
+    font-size: xx-large;
+    color: teal;
 }

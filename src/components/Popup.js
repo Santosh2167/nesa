@@ -1,6 +1,7 @@
-import React from 'react'
-import { Popup } from 'react-leaflet'
+import React, { Component } from 'react'
+import { Popup as LeafletPopup } from 'react-leaflet'
 import './Popup.css'
+import Loading from './Loading';
 
 const Ratings = ({ business }) => {
   const stars = []
@@ -27,19 +28,34 @@ const Ratings = ({ business }) => {
   )
 }
 
-export default ({ business }) => (
-  <Popup closeButton={false} autoPan={false}>
-    <a className="popup-title" href={business.url}>{business.name}</a>
-    <div className="popup-categories">
-      {business.categories.map(category => category.title).join(' / ')}
-    </div>
-    {business.image_url &&
-      <div className="popup-thumbnail">
-        <img src={business.image_url} alt={business.name} />
-      </div>
+export default class Popup extends Component {
+
+  onAddFav = () => {
+    const { business, handleAddFav } = this.props;
+    if (handleAddFav) {
+      handleAddFav(business)
     }
-    <a href={`tel:${business.phone}`}>{business.display_phone}</a>
-    <Ratings business={business} />
-    <strong className="popup-price">{business.price}</strong>
-  </Popup>
-)
+  }
+
+  render() {
+    const { business } = this.props;
+
+    return (
+      <LeafletPopup closeButton={false} autoPan={false}>
+        <a className="popup-title" href={business.url}>{business.name}</a>
+        <div className="popup-categories">
+          {business.categories.map(category => category.title).join(' / ')}
+        </div>
+        {business.image_url &&
+          <div className="popup-thumbnail">
+            <img src={business.image_url} alt={business.name} />
+          </div>
+        }
+        <a href={`tel:${business.phone}`}>{business.display_phone}</a>
+        <Ratings business={business} />
+        <a onClick={this.onAddFav}>Add</a>
+        <strong className="popup-price">{business.price}</strong>
+      </LeafletPopup>
+    )
+  }
+}
