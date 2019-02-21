@@ -1,4 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import deleteIcon from '../../svg/delete.svg';
+import '../Item/Item.css'
 
 
 export default class Item extends Component {
@@ -14,7 +16,7 @@ export default class Item extends Component {
 
     return (
       <p className="nesa-fav-list-item">
-        <button onClick={this.onDelete}>x</button>
+        <img src={deleteIcon} className="nesa-delete-btn" onClick={this.onDelete} alt="delete-icon" />
         <a href={business.url}>{business.name}</a>
       </p>
     )
