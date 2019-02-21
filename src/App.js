@@ -52,6 +52,11 @@ export default class App extends Component {
     this.setState({ favList: newFavourites });
   }
 
+  handleDelete = (businessId) => {
+    const newFavourites = this.favourites.remove(businessId);
+    this.setState({ favList: newFavourites });
+  }
+
   handlePanSearch = debounce(async () => {
     this.setState({ isLoading: true });
     const results = await searchBusinesses(this.state.searchStr, this.state.mapCenter)
@@ -65,6 +70,7 @@ export default class App extends Component {
           isLoading={this.state.isLoading}
           onSearch={this.handleSearch}
           favList={this.state.favList}
+          handleDelete={this.handleDelete}
         />
         <Map
           handleAddFav={this.handleAddFav}

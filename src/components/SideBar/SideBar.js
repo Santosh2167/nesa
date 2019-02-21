@@ -7,7 +7,7 @@ import List from '../List/List';
 
 export default class SideBar extends Component {
   render() {
-    const { isLoading, favList } = this.props;
+    const { isLoading, favList, handleDelete } = this.props;
 
     return (
       <div className="sidebar">
@@ -17,7 +17,7 @@ export default class SideBar extends Component {
         </div>
         <SearchBar onSearch={this.props.onSearch} />
         {isLoading && <Loading />}
-        <List favList={favList} />
+        <List favList={favList} handleDelete={handleDelete} />
       </div>
     )
   }
