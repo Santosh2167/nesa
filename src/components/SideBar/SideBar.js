@@ -13,7 +13,7 @@ export default class SideBar extends Component {
       <div className="sidebar">
         <div className="icon-title">
           <Icon />
-          <div className="sidebar-title">Let's Eat!</div>
+          <div className="sidebar-title">Brian!</div>
         </div>
         <SearchBar onSearch={this.props.onSearch} />
         {isLoading && <Loading />}

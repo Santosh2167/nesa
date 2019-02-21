@@ -14,9 +14,10 @@
 
 .sidebar-title{
   position: relative;
-    top: 20px;
-    left: 10px;
-    font-family: fantasy;
-    font-size: xx-large;
-    color: teal;
+  top: 20px;
+  left: 10px;
+  font-family: fantasy;
+  font-size: xx-large;
+  /* color: teal; */
+  color: #000000;
 }
