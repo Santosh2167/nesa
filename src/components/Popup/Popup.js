@@ -38,7 +38,7 @@ export default class Popup extends Component {
   }
 
   render() {
-    const { business } = this.props;
+    const { business, isFavourite } = this.props;
 
     return (
       <LeafletPopup closeButton={false} autoPan={false}>

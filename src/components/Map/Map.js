@@ -20,6 +20,7 @@ export default class MapComponent extends Component {
   render() {
     const {
       searchResults,
+      favList,
       onViewportChanged,
       initialViewport,
       handleAddFav,
@@ -40,19 +41,27 @@ export default class MapComponent extends Component {
           zoomOffset={-1}
           url={`https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token=${ACCESS_TOKEN}`}
         />
-        {searchResults.map(business =>
-          <Marker
-            key={business.id}
-            position={{
-              lat: business.coordinates.latitude,
-              lng: business.coordinates.longitude,
-            }}
-            icon={MapIcon}
-            riseOnHover
-          >
-            <Popup handleAddFav={handleAddFav} business={business} />
-          </Marker>
-        )}
+        {searchResults.map(business => {
+          const isFavourite = favList.some(fav => fav.id === business.id);
+          return (
+            <Marker
+              key={business.id}
+              position={{
+                lat: business.coordinates.latitude,
+                lng: business.coordinates.longitude,
+              }}
+              icon={MapIcon}
+              riseOnHover
+              className={isFavourite ? 'favourite' : null}
+            >
+              <Popup
+                handleAddFav={handleAddFav}
+                business={business}
+                isFavourite={isFavourite}
+              />
+            </Marker>
+          )
+        })}
       </Map>
     )
   }

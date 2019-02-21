@@ -4,6 +4,7 @@ import { searchBusinesses } from './yelpApi'
 import Map from './components/Map/Map'
 import SideBar from './components/SideBar/SideBar'
 import debounce from 'lodash.debounce';
+import Favourites from './modules/Favourites';
 
 const LOCAL_STORAGE_KEY = 'favourites';
 
@@ -13,21 +14,20 @@ const INITIAL_VIEWPORT = {
 }
 
 export default class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
-    this.localStorageFavs = window.localStorage.getItem(LOCAL_STORAGE_KEY);
-  }
-
-  state = {
-    isLoading: false,
-    results: [],
-    favList: this.localStorageFavs ? JSON.parse(this.localStorageFavs) : [],
-    mapCenter: {
-      lat: INITIAL_VIEWPORT.center[0],
-      lng: INITIAL_VIEWPORT.center[1],
-    },
-    searchStr: '',
+    this.favourites = new Favourites();
+    this.state = {
+      isLoading: false,
+      results: [],
+      favList: this.favourites.get(),
+      mapCenter: {
+        lat: INITIAL_VIEWPORT.center[0],
+        lng: INITIAL_VIEWPORT.center[1],
+      },
+      searchStr: '',
+    };
   }
 
   handleSearch = async (searchStr) => {
@@ -48,15 +48,12 @@ export default class App extends Component {
   }
 
   handleAddFav = (business) => {
-    const favList = this.state.favList;
-    favList.push(business);
-    this.setState({ favList })
+    const newFavourites = this.favourites.add(business);
+    this.setState({ favList: newFavourites });
   }
 
   handlePanSearch = debounce(async () => {
-    this.setState({
-      isLoading: true,
-    })
+    this.setState({ isLoading: true });
     const results = await searchBusinesses(this.state.searchStr, this.state.mapCenter)
     this.setState({ results, isLoading: false })
   }, 300)
@@ -72,6 +69,7 @@ export default class App extends Component {
         <Map
           handleAddFav={this.handleAddFav}
           searchResults={this.state.results}
+          favList={this.state.favList}
           onViewportChanged={this.handleViewportChange}
           initialViewport={INITIAL_VIEWPORT}
         />
