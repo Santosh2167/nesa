@@ -30,3 +30,13 @@ a.popup-title {
 .popup-price {
   letter-spacing: 2px;
 }
+
+.popup-bottom-group {
+  display: flex;
+}
+
+.popup-heart-icon {
+  margin-left: auto;
+  width: 20px;
+  height: 20px;
+}

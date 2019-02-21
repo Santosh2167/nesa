@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Popup as LeafletPopup } from 'react-leaflet'
-import '../Popup/Popup.css'
+import '../Popup/Popup.css';
+import heartIcon from '../../svg/heart.svg';
 
 const Ratings = ({ business }) => {
   const stars = []
@@ -52,8 +53,10 @@ export default class Popup extends Component {
         }
         <a href={`tel:${business.phone}`}>{business.display_phone}</a>
         <Ratings business={business} />
-        <a onClick={this.onAddFav}>Add</a>
-        <strong className="popup-price">{business.price}</strong>
+        <div className="popup-bottom-group">
+          <strong className="popup-price">{business.price}</strong>
+          <img onClick={this.onAddFav} src={heartIcon} className="popup-heart-icon" alt="heart-icon" />
+        </div>
       </LeafletPopup>
     )
   }
