@@ -1,6 +1,6 @@
 import React from 'react'
-import icon from '../svg/icon.svg';
-import './Icon.css';
+import icon from '../../svg/icon.svg';
+import '../Icon/Icon.css';
 
 function Icon() {
   return (

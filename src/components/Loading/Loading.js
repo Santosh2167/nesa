@@ -1,6 +1,6 @@
 import React from 'react'
-import loadingIcon from '../svg/loading.svg';
-import './Loading.css';
+import loadingIcon from '../../svg/loading.svg';
+import '../Loading/Loading.css';
 
 function Loading() {
   return (

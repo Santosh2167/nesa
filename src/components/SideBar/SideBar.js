@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import './SideBar.css'
-import SearchBar from './SearchBar'
-import Icon from './Icon';
-import Loading from './Loading';
+import '../SideBar/SideBar.css'
+import SearchBar from '../SearchBar/SearchBar'
+import Icon from '../Icon/Icon';
+import Loading from '../Loading/Loading';
 
 export default class SideBar extends Component {
   render() {

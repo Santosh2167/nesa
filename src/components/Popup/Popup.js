@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Popup as LeafletPopup } from 'react-leaflet'
-import './Popup.css'
-import Loading from './Loading';
+import '../Popup/Popup.css'
 
 const Ratings = ({ business }) => {
   const stars = []

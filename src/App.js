@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import './App.css'
 import { searchBusinesses } from './yelpApi'
-import Map from './components/Map'
-import SideBar from './components/SideBar'
+import Map from './components/Map/Map'
+import SideBar from './components/SideBar/SideBar'
 import debounce from 'lodash.debounce'
 
 const INITIAL_VIEWPORT = {

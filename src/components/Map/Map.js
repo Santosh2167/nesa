@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import Leaflet from 'leaflet'
 import { Map, TileLayer, Marker } from 'react-leaflet'
-import Popup from './Popup'
-import mapIconSvg from '../svg/map.svg'
-import './Map.css'
+import Popup from '../Popup/Popup'
+import mapIconSvg from '../../svg/map.svg'
+import '../Map/Map.css'
 
 const ACCESS_TOKEN = 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw'
 // const ACCESS_TOKEN = 'pk.eyJ1IjoiYnJpYW5obWxldW5nIiwiYSI6ImNqczhsdmJ0YTA5cDU0M3FrODJ0NGhicmoifQ.SGMvdUSnN0s1olr0HFk0KA'
