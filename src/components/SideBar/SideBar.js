@@ -3,6 +3,7 @@ import '../SideBar/SideBar.css'
 import SearchBar from '../SearchBar/SearchBar'
 import Icon from '../Icon/Icon';
 import Loading from '../Loading/Loading';
+import List from '../List/List';
 
 export default class SideBar extends Component {
   render() {
@@ -16,12 +17,7 @@ export default class SideBar extends Component {
         </div>
         <SearchBar onSearch={this.props.onSearch} />
         {isLoading && <Loading />}
-
-        {favList.map(business => (
-          <p>
-            <a className="popup-title" href={business.url}>{business.name}</a>
-          </p>
-        ))}
+        <List favList={favList} />
       </div>
     )
   }

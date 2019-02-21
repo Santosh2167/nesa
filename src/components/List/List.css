@@ -1,0 +1,17 @@
+.nesa-fav-list {
+  margin-top: 10px;
+  /* border: 2px solid rgba(20, 158, 147, 0.4); */
+  position: relative;
+  left: 15px;
+  top: 7px;
+  z-index: 2;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.nesa-fav-list-item a {
+  font-size: 18px;
+  text-decoration: none;
+  font-weight: 200;
+}
