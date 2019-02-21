@@ -3,7 +3,9 @@ import './App.css'
 import { searchBusinesses } from './yelpApi'
 import Map from './components/Map/Map'
 import SideBar from './components/SideBar/SideBar'
-import debounce from 'lodash.debounce'
+import debounce from 'lodash.debounce';
+
+const LOCAL_STORAGE_KEY = 'favourites';
 
 const INITIAL_VIEWPORT = {
   center: [-33.872661, 151.205452],
@@ -11,10 +13,16 @@ const INITIAL_VIEWPORT = {
 }
 
 export default class App extends Component {
+  constructor() {
+    super();
+
+    this.localStorageFavs = window.localStorage.getItem(LOCAL_STORAGE_KEY);
+  }
+
   state = {
     isLoading: false,
     results: [],
-    favList: [],
+    favList: this.localStorageFavs ? JSON.parse(this.localStorageFavs) : [],
     mapCenter: {
       lat: INITIAL_VIEWPORT.center[0],
       lng: INITIAL_VIEWPORT.center[1],
