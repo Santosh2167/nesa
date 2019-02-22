@@ -15,3 +15,7 @@
 .leaflet-marker-icon:focus {
   outline: none;
 }
+
+.map-icon {
+  fill: #000;
+}

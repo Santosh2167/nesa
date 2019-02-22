@@ -6,8 +6,6 @@ import SideBar from './components/SideBar/SideBar'
 import debounce from 'lodash.debounce';
 import Favourites from './modules/Favourites';
 
-const LOCAL_STORAGE_KEY = 'favourites';
-
 const INITIAL_VIEWPORT = {
   center: [-33.872661, 151.205452],
   zoom: 17,

@@ -3,15 +3,16 @@ import Leaflet from 'leaflet'
 import { Map, TileLayer, Marker } from 'react-leaflet'
 import Popup from '../Popup/Popup'
 import mapIconSvg from '../../svg/map.svg'
-import '../Map/Map.css'
+import '../Map/Map.css';
 
 const ACCESS_TOKEN = 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw'
 // const ACCESS_TOKEN = 'pk.eyJ1IjoiYnJpYW5obWxldW5nIiwiYSI6ImNqczhsdmJ0YTA5cDU0M3FrODJ0NGhicmoifQ.SGMvdUSnN0s1olr0HFk0KA'
 
-const MapIcon = new Leaflet.Icon({
+const getMapIcon = (isFavourite) => new Leaflet.Icon({
   iconUrl: mapIconSvg,
   iconSize: [25, 55],
   popupAnchor: [0, -35],
+  fillColor: '#ff0000',
 })
 
 export default class MapComponent extends Component {
@@ -42,6 +43,7 @@ export default class MapComponent extends Component {
           url={`https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token=${ACCESS_TOKEN}`}
         />
         {searchResults.map(business => {
+          /* checks for each business in result if that is a favourite already */
           const isFavourite = favList.some(fav => fav.id === business.id);
           return (
             <Marker
@@ -50,9 +52,10 @@ export default class MapComponent extends Component {
                 lat: business.coordinates.latitude,
                 lng: business.coordinates.longitude,
               }}
-              icon={MapIcon}
+              icon={getMapIcon(isFavourite)}
               riseOnHover
-              className={isFavourite ? 'favourite' : null}
+              opacity={isFavourite ? '1' : '0.25'}
+            // className={isFavourite ? 'favourite-marker' : null}
             >
               <Popup
                 handleAddFav={handleAddFav}
