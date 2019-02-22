@@ -10,12 +10,13 @@ export default class SideBar extends Component {
 
     return (
       <div className="sidebar">
-        <div className="icon-title">
-          <img src={logoSvg} className="logo" alt="logo" />
+        <div className="sidebar-top">
+          <img src={logoSvg} className="sidebar-logo" alt="logo" />
           <div className="sidebar-title">Nesa</div>
         </div>
         <SearchBar onSearch={this.props.onSearch} />
         <List favourites={favourites} handleDelete={handleDelete} />
+        <div className="sidebar-made-by">Made by Brian Leung</div>
       </div>
     )
   }

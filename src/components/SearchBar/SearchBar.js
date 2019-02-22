@@ -19,6 +19,7 @@ export default class Search extends Component {
       <div className="search-bar">
         <input
           className="search-bar-input"
+          placeholder="Search and press enter"
           value={this.state.text}
           onChange={this.handleTextChange}
           onKeyPress={this.handleKeyPress}
