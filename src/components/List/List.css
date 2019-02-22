@@ -39,9 +39,17 @@
   text-decoration: none;
 }
 
+.list-item:hover .delete-btn {
+  display: block;
+}
+
 .list-item a:hover,
 .list-item a:focus {
   text-decoration: underline;
+}
+
+.delete-btn {
+  display: none;
 }
 
 .delete-btn:hover,
