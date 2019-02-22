@@ -11,7 +11,11 @@ export default class Favourites {
     const duplicated = favourites.some(fav => fav.id === favourite.id);
     if (duplicated) return favourites;
 
-    const newFavourites = [...favourites, favourite];
+    const newFavourites = [
+      ...favourites,
+      { ...favourite, favourite: true },
+    ];
+
     window.localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newFavourites));
     return newFavourites;
   }

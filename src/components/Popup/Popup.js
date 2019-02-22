@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Popup as LeafletPopup } from 'react-leaflet'
-import '../Popup/Popup.css';
-import redHeartIcon from '../../svg/redheart.svg';
-import greyHeartIcon from '../../svg/greyheart.svg';
+import './Popup.css';
+import redHeartIcon from '../../svg/heartRed.svg';
+import greyHeartIcon from '../../svg/heartGrey.svg';
 
 const Ratings = ({ business }) => {
   const stars = []
@@ -30,16 +30,8 @@ const Ratings = ({ business }) => {
 }
 
 export default class Popup extends Component {
-
-  onAddFav = () => {
-    const { business, handleAddFav } = this.props;
-    if (handleAddFav) {
-      handleAddFav(business)
-    }
-  }
-
   render() {
-    const { business, isFavourite } = this.props;
+    const { business, handleAddFav } = this.props
 
     return (
       <LeafletPopup closeButton={false} autoPan={false}>
@@ -56,11 +48,12 @@ export default class Popup extends Component {
         <Ratings business={business} />
         <div className="popup-bottom-group">
           <strong className="popup-price">{business.price}</strong>
-          {isFavourite ?
-            <img onClick={this.onAddFav} src={redHeartIcon} className='popup-heart-icon' alt="heart-icon" /> :
-            <img onClick={this.onAddFav} src={greyHeartIcon} className='popup-heart-icon' alt="heart-icon" />
-          }
-          {/* // <img onClick={this.onAddFav} src={heartIcon} className={isFavourite ? 'red-popup-heart-icon' : 'grey-popup-heart-icon'} alt="heart-icon" /> */}
+          <img
+            onClick={() => handleAddFav(business)}
+            src={business.favourite ? redHeartIcon : greyHeartIcon}
+            className='popup-heart-icon'
+            alt="heart-icon"
+          />
         </div>
       </LeafletPopup>
     )

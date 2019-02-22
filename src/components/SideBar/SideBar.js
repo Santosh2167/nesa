@@ -1,23 +1,21 @@
 import React, { Component } from 'react'
-import '../SideBar/SideBar.css'
+import './SideBar.css'
 import SearchBar from '../SearchBar/SearchBar'
-import Icon from '../Icon/Icon';
-import Loading from '../Loading/Loading';
 import List from '../List/List';
+import logoSvg from '../../svg/logo.svg';
 
 export default class SideBar extends Component {
   render() {
-    const { isLoading, favList, handleDelete } = this.props;
+    const { favourites, handleDelete } = this.props;
 
     return (
       <div className="sidebar">
         <div className="icon-title">
-          <Icon />
-          <div className="sidebar-title">Brian!</div>
+          <img src={logoSvg} className="logo" alt="logo" />
+          <div className="sidebar-title">Nesa</div>
         </div>
         <SearchBar onSearch={this.props.onSearch} />
-        {isLoading && <Loading />}
-        <List favList={favList} handleDelete={handleDelete} />
+        <List favourites={favourites} handleDelete={handleDelete} />
       </div>
     )
   }

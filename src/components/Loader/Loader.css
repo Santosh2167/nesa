@@ -1,0 +1,7 @@
+.loader {
+  position: absolute;
+  top: 10px;
+  left: calc(50% + 150px);
+  z-index: 1000;
+  width: 70px;
+}

@@ -1,15 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react'
+import deleteIcon from '../../svg/delete.svg';
 import './List.css';
-import Item from '../Item/Item';
 
-export default function List({ favList, handleDelete }) {
-  if (!favList.length) {
-    return null;
-  }
-  else {
+export default class List extends Component {
+  render() {
+    const { favourites, handleDelete } = this.props
+
+    if (!favourites.length) return null
     return (
-      <div className="nesa-fav-list">
-        {favList.map(business => (<Item business={business} handleDelete={handleDelete} />))}
+      <div className="list">
+        {favourites.map(business => (
+          <div className="list-item" key={business.id}>
+            <a
+              href={business.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {business.name}
+            </a>
+            <img
+              src={deleteIcon}
+              className="delete-btn"
+              onClick={() => handleDelete(business.id)}
+              alt="delete-icon"
+            />
+          </div>
+        ))}
       </div>
     )
   }

@@ -1,34 +1,26 @@
 import React, { Component } from 'react'
-import Leaflet from 'leaflet'
-import { Map, TileLayer, Marker } from 'react-leaflet'
-import Popup from '../Popup/Popup'
-import mapIconSvg from '../../svg/map.svg'
-import '../Map/Map.css';
+import { Map as LeafletMap, TileLayer } from 'react-leaflet'
+import Marker from './Marker'
+import './Map.css';
 
 const ACCESS_TOKEN = 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw'
 // const ACCESS_TOKEN = 'pk.eyJ1IjoiYnJpYW5obWxldW5nIiwiYSI6ImNqczhsdmJ0YTA5cDU0M3FrODJ0NGhicmoifQ.SGMvdUSnN0s1olr0HFk0KA'
 
-const getMapIcon = (isFavourite) => new Leaflet.Icon({
-  iconUrl: mapIconSvg,
-  iconSize: [25, 55],
-  popupAnchor: [0, -35],
-  fillColor: '#ff0000',
-})
-
-export default class MapComponent extends Component {
+export default class Map extends Component {
   mapRef = React.createRef()
 
   render() {
     const {
       searchResults,
-      favList,
+      favourites,
       onViewportChanged,
       initialViewport,
       handleAddFav,
     } = this.props
 
+    const alreadyRendered = []
     return (
-      <Map
+      <LeafletMap
         viewport={initialViewport}
         ref={this.mapRef}
         style={{ height: '100vh' }}
@@ -42,30 +34,27 @@ export default class MapComponent extends Component {
           zoomOffset={-1}
           url={`https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token=${ACCESS_TOKEN}`}
         />
-        {searchResults.map(business => {
-          /* checks for each business in result if that is a favourite already */
-          const isFavourite = favList.some(fav => fav.id === business.id);
+        {favourites.map(business => {
+          alreadyRendered.push(business.id)
           return (
             <Marker
               key={business.id}
-              position={{
-                lat: business.coordinates.latitude,
-                lng: business.coordinates.longitude,
-              }}
-              icon={getMapIcon(isFavourite)}
-              riseOnHover
-              opacity={isFavourite ? '1' : '0.25'}
-            // className={isFavourite ? 'favourite-marker' : null}
-            >
-              <Popup
-                handleAddFav={handleAddFav}
-                business={business}
-                isFavourite={isFavourite}
-              />
-            </Marker>
+              business={business}
+              handleAddFav={handleAddFav}
+            />
           )
         })}
-      </Map>
+        {searchResults.map(business => {
+          if (alreadyRendered.indexOf(business.id) > -1) return null
+          return (
+            <Marker
+              key={business.id}
+              business={business}
+              handleAddFav={handleAddFav}
+            />
+          )
+        })}
+      </LeafletMap>
     )
   }
 }
